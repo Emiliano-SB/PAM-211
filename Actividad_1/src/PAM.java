@@ -117,6 +117,7 @@ public class PAM
                     break;
                 case 5:
                     System.out.println("¡Muchas por su visita!");
+                    break;
                 default:
                     System.out.println("La opción no se encuentra dentro del rango de opciones, por favor, seleccione una opción del 1 al 5.");
                     break;
