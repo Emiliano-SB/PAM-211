@@ -12,3 +12,10 @@ nombre = "Ana Maria";
 const saludo = "Hola, " + nombre + ". Tienes " + edad + " años.";
 console.log(saludo);
 
+//Ejercicio B
+
+var cuadrado = (numero) => numero * numero;
+console.log(cuadrado(5)); 
+console.log(cuadrado(2));
+console.log(cuadrado(3));
+
