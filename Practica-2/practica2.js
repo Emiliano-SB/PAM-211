@@ -30,3 +30,22 @@ const productosfiltrados = productos.filter(producto => producto.precio > 1000);
 const nombres = productosfiltrados.map(productos => productos.nombre);
 console.log(nombres);
 
+//Ejercicio C
+const personas = [
+    {nombre: "Ana", edad: 22},
+    {nombre: "Luis", edad: 35},
+    {nombre: "María", edad: 28}
+];
+//De acuerdo al ejercicio que nos pidio el maestro lo primero que hice fue usar un filtro (método find) para buscar
+//dentro del arreglo que nos dieron a la persona que se llama "Luis"
+const encontrado = personas.find(persona => persona.nombre === "Luis");
+//Después de ese primer filtro lo que hice fue usar un método (forEach) para mostrar el nombre de las personas que se encuentran
+//dentro del arreglo e imprimirlos los nombres
+const nom = personas.forEach(persona => console.log("Nombre: "+persona.nombre));
+//Por último lo que hice fue usar un método (reduce) para sumar todas las edades de las personas  
+const suma = personas.reduce((acomulador, persona)=> acomulador + persona.edad,0);
+//Aquí lo que hice fue imprimir dentro de la consola los resultados del filtro del método find y el reduce
+console.log(encontrado);
+console.log("Suma de edades: "+suma);
+
+
