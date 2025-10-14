@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   //Agregamos otra clase para los botones
   botonesContainer:{
-    marginTop: 20,//Margen para "empujar" los botones de la parte de arriba (margen superior)
+    marginTop: 20, //Margen para "empujar" los botones de la parte de arriba (margen superior)
     flexDirection: 'row',//Mostrar la direccion de los elementos (row = fila) ya que estan en columnas como default
     gap:20, //es para hacer separaciones a los lados de los botones
     
