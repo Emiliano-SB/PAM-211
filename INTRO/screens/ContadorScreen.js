@@ -1,4 +1,3 @@
-
 //1. Imports: Zona de importaciones a las screens (pantallas)
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
@@ -35,25 +34,24 @@ export default function ContadorScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, //Crear un contenedor y como los podemos repartir
-    backgroundColor: '#b7b6b6ff', //Color de fondo
+    backgroundColor: '#836969ff', //Color de fondo
     alignItems: 'center', //Alineacion de dichos elementos que pongamos (En el eje X)
     justifyContent: 'center', //Justificacion de dichos elementos (En el eje Y)
   },
   //Ahora crearemos otra clase para un texto
   texto:{
-    color:'#3b2e9fff', //Color del texto
+    color:'#070709ff', //Color del texto
     fontSize: 30, //Tamaño del texto
     fontFamily: 'Times New Roman', //Para la fuente de la pantalla
     fontWeight: 'bold', //Agregar la negrita tradicional
     fontStyle: 'Italic', //Para agregar la "cursiva"
-    textDecorationLine: 'Line-through', //Para "tachar" algun texto que queramos
   },
   //Agregamos otro pero para el "contador"
   texto2:{
-    color:'#9f2e2eff', //Color del texto
+    color:'#040404ff', //Color del texto
     fontSize: 40, //Tamaño del texto
-    fontFamily: 'Courier', //Para la fuente de la pantalla
-    fontWeight: '900', //Agregar la negrita tradicional
+    fontFamily: 'Times New Roman', //Para la fuente de la pantalla
+    fontWeight: 'bold', //Agregar la negrita tradicional
     fontStyle: 'Italic', //Para agregar la "cursiva"
     textDecorationLine: 'underline', //Para "subrayar" cualquier texto
   },
@@ -62,6 +60,6 @@ const styles = StyleSheet.create({
     marginTop: 20,//Margen para "empujar" los botones de la parte de arriba (margen superior)
     flexDirection: 'row',//Mostrar la direccion de los elementos (row = fila) ya que estan en columnas como default
     gap:20, //es para hacer separaciones a los lados de los botones
-
+    
   },
 });
