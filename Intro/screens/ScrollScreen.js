@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native-web'
 
 
-export default function BotonesScreen(){
+export default function ScrollScreen(){
   
     return (
       <View>

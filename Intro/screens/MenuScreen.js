@@ -1,7 +1,14 @@
-import { Text, StyleSheet, View, Button } from 'react-native'
-import React, { useState } from 'react'
+import { Text, StyleSheet, View, Button } from 'react-native';
+import React, { useState } from 'react';
 import BotonesScreen from './BotonesScreen';
 import ContadorScreen from './ContadorScreen';
+import TextoScreen from './TextoScreen';
+import ImagenesScreen from './ImagenesScreen';
+import ScrollScreen from './ScrollScreen';
+import ActivityScreen from './ActivityScreen';
+import FlatlistScreen from './FlatlistScreen';
+import ModalScreen from './ModalScreen';
+
 
 export default function MenuScreen() {
     const [screen, setScreen] = useState('menu');
@@ -11,14 +18,32 @@ export default function MenuScreen() {
             return <ContadorScreen/>;
         case 'botones' :
             return <BotonesScreen/>;
+        case 'textos':
+            return <TextoScreen/>;
+        case 'imagenes':
+            return <ImagenesScreen/>;
+        case 'scrolles':
+            return <ScrollScreen/>;
+        case 'activity':
+            return<ActivityScreen/>;
+        case 'lista':
+            return<FlatlistScreen/>;
+        case 'modal':
+            return<ModalScreen/>;
         case 'menu' :
             default: 
             return (
                 <View style={styles.container}>
                     <Text style={styles.texto} >Menu de Practicas</Text>
                     <View style={styles.botonesContainer}>
-                        <Button  color='red' onPress={()=>setScreen('contador')} title='Practica Contador'></Button>
-                        <Button color='orange'onPress={()=>setScreen('botones')} title='Practica Botones'></Button>
+                        <Button  color='brown' onPress={()=>setScreen('contador')} title='Practica Contador'></Button>
+                        <Button color='brown'onPress={()=>setScreen('botones')} title='Practica Buttons & switch'></Button>
+                        <Button color='brown' onPress={()=>setScreen('textos')} title='Practica Text Input & Alert'></Button>
+                        <Button color='brown' onPress={()=>setScreen('imagenes')} title='Practica ImageBackgroung & SlapshScreen'></Button>
+                        <Button color= 'brown' onPress={()=>setScreen('scrolles')} title='Practica de ScrollView'></Button>
+                        <Button color ='brown' onPress={()=>setScreen('activity')} title='Practica de ActivityIndicator'></Button>
+                        <Button color='brown' onPress={()=>setScreen('lista')} title='Practica de FlatList y Section List'></Button>
+                        <Button color='brown' onPress={()=>setScreen('modal')} title='Practica Modal'></Button>
                     </View>
                 </View>
             )
@@ -36,7 +61,6 @@ const styles = StyleSheet.create({
     },
     botonesContainer:{
         marginTop: 20,//Margen para "empujar" los botones de la parte de arriba (margen superior)
-        flexDirection: 'row',//Mostrar la direccion de los elementos (row = fila) ya que estan en columnas como default
         gap:20, //es para hacer separaciones a los lados de los botones
     },
     texto:{

@@ -9,6 +9,7 @@ export default function ContadorScreen() {
 
   const [contador, setContador]= useState(0); 
 
+
   return (
     //El objeto Style con la propiedad container
     <View style={styles.container}> 
@@ -19,7 +20,7 @@ export default function ContadorScreen() {
       <View style={styles.botonesContainer}>
         <Button color='red' title='Agregar' onPress={()=> setContador(contador + 1)}/>
         <Button color='orange' title='Quitar' onPress={()=> setContador(contador - 1)}/>
-        <Button color='green' title='Reiniciar' onPress={()=> setContador(contador *0)}/>
+        <Button color='green' title='Reiniciar' onPress={()=> setContador(contador * 0)}/>
       </View>
 
 
