@@ -5,8 +5,8 @@ import React, {useState} from 'react'
 export default function TextoScreen(){
 
   const [nombre, setNombre] = useState('');
-  const [contrasena, setContrasena] = useState(''); //Estado para el de contraseña
-  const [texto, setTexto] = useState(''); //Estado para el de multilinea
+  const [contrasena, setContrasena] = useState(''); 
+  const [texto, setTexto] = useState(''); 
 
   const mostrarAlerta = () => {
     if(nombre.trim() === '' || contrasena.trim() === '' || texto.trim() === ''){

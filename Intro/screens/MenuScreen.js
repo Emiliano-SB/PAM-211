@@ -20,7 +20,7 @@ export default function MenuScreen() {
             return <BotonesScreen/>;
         case 'textos':
             return <TextoScreen/>;
-        case 'imagenes':
+        case 'imagen':
             return <ImagenesScreen/>;
         case 'scrolles':
             return <ScrollScreen/>;
@@ -39,7 +39,7 @@ export default function MenuScreen() {
                         <Button  color='brown' onPress={()=>setScreen('contador')} title='Practica Contador'></Button>
                         <Button color='brown'onPress={()=>setScreen('botones')} title='Practica Buttons & switch'></Button>
                         <Button color='brown' onPress={()=>setScreen('textos')} title='Practica Text Input & Alert'></Button>
-                        <Button color='brown' onPress={()=>setScreen('imagenes')} title='Practica ImageBackgroung & SlapshScreen'></Button>
+                        <Button color='brown' onPress={()=>setScreen('imagen')} title='Practica ImageBackgroung & SlapshScreen'></Button>
                         <Button color= 'brown' onPress={()=>setScreen('scrolles')} title='Practica de ScrollView'></Button>
                         <Button color ='brown' onPress={()=>setScreen('activity')} title='Practica de ActivityIndicator'></Button>
                         <Button color='brown' onPress={()=>setScreen('lista')} title='Practica de FlatList y Section List'></Button>
