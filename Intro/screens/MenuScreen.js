@@ -39,15 +39,15 @@ export default function MenuScreen() {
                 <View style={styles.container}>
                     <Text style={styles.texto} >Menu de Practicas</Text>
                     <View style={styles.botonesContainer}>
-                        <Button  color='brown' onPress={()=>setScreen('contador')} title='Practica Contador'></Button>
-                        <Button color='brown'onPress={()=>setScreen('botones')} title='Practica Buttons & switch'></Button>
-                        <Button color='brown' onPress={()=>setScreen('textos')} title='Practica Text Input & Alert'></Button>
-                        <Button color='brown' onPress={()=>setScreen('imagen')} title='Practica ImageBackgroung & SlapshScreen'></Button>
-                        <Button color= 'brown' onPress={()=>setScreen('scrolles')} title='Practica de ScrollView'></Button>
-                        <Button color ='brown' onPress={()=>setScreen('activity')} title='Practica de ActivityIndicator'></Button>
-                        <Button color='brown' onPress={()=>setScreen('lista')} title='Practica de FlatList y Section List'></Button>
-                        <Button color='brown' onPress={()=>setScreen('modal')} title='Practica Modal'></Button>
-                        <Button color='brown' onPress={()=> setScreen('repaso')} title='Repaso 1'></Button>
+                        <Button  color='blue' onPress={()=>setScreen('contador')} title='Practica Contador'></Button>
+                        <Button color='blue'onPress={()=>setScreen('botones')} title='Practica Buttons & switch'></Button>
+                        <Button color='blue' onPress={()=>setScreen('textos')} title='Practica Text Input & Alert'></Button>
+                        <Button color='blue' onPress={()=>setScreen('imagen')} title='Practica ImageBackgroung & SlapshScreen'></Button>
+                        <Button color= 'blue' onPress={()=>setScreen('scrolles')} title='Practica de ScrollView'></Button>
+                        <Button color ='blue' onPress={()=>setScreen('activity')} title='Practica de ActivityIndicator'></Button>
+                        <Button color='blue' onPress={()=>setScreen('lista')} title='Practica de FlatList y Section List'></Button>
+                        <Button color='blue' onPress={()=>setScreen('modal')} title='Practica Modal'></Button>
+                        <Button color='blue' onPress={()=> setScreen('repaso')} title='Repaso 1'></Button>
                     </View>
                 </View>
             )
@@ -59,7 +59,7 @@ export default function MenuScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1, //Crear un contenedor y como los podemos repartir
-        backgroundColor: '#836969ff', //Color de fondo
+        backgroundColor: '#8989c5e3', //Color de fondo
         alignItems: 'center', //Alineacion de dichos elementos que pongamos (En el eje X)
         justifyContent: 'center', //Justificacion de dichos elementos (En el eje Y)
     },
