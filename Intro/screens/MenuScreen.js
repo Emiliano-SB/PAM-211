@@ -9,6 +9,8 @@ import ActivityScreen from './ActivityScreen';
 import FlatlistScreen from './FlatlistScreen';
 import ModalScreen from './ModalScreen';
 import RepasoScreen from './RepasoScreen';
+import ActividadScreen from './ActividadScreen';
+import TransaccionesScreen from './TransaccionesScreen';
 
 
 export default function MenuScreen() {
@@ -33,6 +35,10 @@ export default function MenuScreen() {
             return<ModalScreen/>;
         case 'repaso':
             return<RepasoScreen/>;
+        case 'actividad':
+            return <ActividadScreen/>;
+        case 'transaccion':
+            return<TransaccionesScreen/>;
         case 'menu' :
             default: 
             return (
@@ -48,6 +54,8 @@ export default function MenuScreen() {
                         <Button color='blue' onPress={()=>setScreen('lista')} title='Practica de FlatList y Section List'></Button>
                         <Button color='blue' onPress={()=>setScreen('modal')} title='Practica Modal'></Button>
                         <Button color='blue' onPress={()=> setScreen('repaso')} title='Repaso 1'></Button>
+                        <Button color= 'blue' onPress={()=>setScreen('actividad')} title='Pantalla de Actividad (Proyecto Materia)'></Button>
+                        <Button color= 'blue' onPress={()=>setScreen('transaccion')} title='Pantalla de Transacciones (Proyecto Materia)'></Button>
                     </View>
                 </View>
             )
