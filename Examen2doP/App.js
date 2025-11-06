@@ -1,8 +1,8 @@
-import MenuScreen from './screens/MenuScreen';
+import InicioScreen from './Screens/InicioScreen';
 
 export default function App() {
   return (
-    <MenuScreen> </MenuScreen>
+    <InicioScreen></InicioScreen>
   );
 }
 

@@ -1,6 +1,6 @@
 import { Text, StyleSheet, View } from 'react-native';
 
-export default function MenuScreen() {
+export default function InicioScreen() {
             return (
                 <View style={styles.container}>
                     <Text style={styles.texto} >Examen 2do parcial</Text>
