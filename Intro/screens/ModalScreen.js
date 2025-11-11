@@ -34,7 +34,7 @@ export default function ModalScreen(){
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:'#8e8c8cff',
+    backgroundColor:'#bfbfbfff',
     alignItems:'center',
     justifyContent:'center', 
   },
