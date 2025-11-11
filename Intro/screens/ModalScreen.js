@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Times New Roman',
     fontWeight:'bold',
     fontStyle:'italic',
-    marginBottom: 15,
+    marginBottom: 25,
   }
 })
