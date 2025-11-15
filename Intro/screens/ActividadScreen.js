@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, StyleSheet, View, FlatList, Button, TextInput, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, FlatList, Button, TextInput, TouchableOpacity, Modal } from 'react-native';
 
 export default function ActividadScreen() {
 
@@ -19,12 +19,26 @@ export default function ActividadScreen() {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [monto, setMonto] = useState('');
-  const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [tipoRegistro, setTipoRegistro] = useState('');
 
   const datos = mostrar === 'recibidos' ? recibidos : realizados;
 
+  const abrirModal = (tipo) => {
+    setTipoRegistro(tipo);
+    setModalVisible(true);
+  };
+
+  const cerrarModal = () => {
+    setModalVisible(false);
+    setNombre('');
+    setDescripcion('');
+    setMonto('');
+  };
+
   const agregarElemento = () => {
     if (!nombre || !descripcion || !monto) return;
+    
     const nuevo = {
       id: Date.now().toString(),
       nombre,
@@ -32,15 +46,14 @@ export default function ActividadScreen() {
       monto: parseFloat(monto),
       fecha: 'ahora mismo'
     };
-    if (mostrar === 'recibidos') {
+
+    if (tipoRegistro === 'ingreso') {
       setRecibidos([...recibidos, nuevo]);
-    } else {
+    } else if (tipoRegistro === 'gasto') {
       setRealizados([...realizados, nuevo]);
     }
-    setNombre('');
-    setDescripcion('');
-    setMonto('');
-    setMostrandoFormulario(false);
+
+    cerrarModal();
   };
 
   return (
@@ -71,38 +84,65 @@ export default function ActividadScreen() {
         )}
       />
 
-      {mostrandoFormulario ? (
-        <View style={styles.formulario}>
-          <TextInput
-            placeholder="Nombre"
-            style={styles.input}
-            value={nombre}
-            onChangeText={setNombre}
+      <View style={styles.botonesAccion}>
+        {mostrar === 'recibidos' ? (
+          <Button 
+            color='black' 
+            title='Registrar ingreso' 
+            onPress={() => abrirModal('ingreso')} 
           />
-          <TextInput
-            placeholder="Descripción"
-            style={styles.input}
-            value={descripcion}
-            onChangeText={setDescripcion}
+        ) : (
+          <Button 
+            color='black' 
+            title='Registrar gasto' 
+            onPress={() => abrirModal('gasto')} 
           />
-          <TextInput
-            placeholder="Monto"
-            style={styles.input}
-            value={monto}
-            keyboardType="numeric"
-            onChangeText={setMonto}
-          />
-          <Button color='black' title="Confirmar" onPress={agregarElemento} />
+        )}
+      </View>
+
+      <Modal
+        animationType='fade'
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={cerrarModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitulo}>
+              {tipoRegistro === 'ingreso' ? 'Registrar Ingreso' : 'Registrar Gasto'}
+            </Text>
+            
+            <TextInput
+              placeholder="Nombre"
+              style={styles.input}
+              value={nombre}
+              onChangeText={setNombre}
+            />
+            <TextInput
+              placeholder="Descripción"
+              style={styles.input}
+              value={descripcion}
+              onChangeText={setDescripcion}
+            />
+            <TextInput
+              placeholder="Monto"
+              style={styles.input}
+              value={monto}
+              keyboardType="numeric"
+              onChangeText={setMonto}
+            />
+            
+            <View style={styles.modalBotones}>
+              <View style={styles.modalBoton}>
+                <Button color='gray' title="Cancelar" onPress={cerrarModal} />
+              </View>
+              <View style={styles.modalBoton}>
+                <Button color='black' title="Confirmar" onPress={agregarElemento} />
+              </View>
+            </View>
+          </View>
         </View>
-      ) : (
-        <View style={styles.botonesAccion}>
-          {mostrar === 'recibidos' ? (
-            <Button color='black' title='Registrar ingreso' onPress={() => setMostrandoFormulario(true)} />
-          ) : (
-            <Button color='black' title='Registrar gasto' onPress={() => setMostrandoFormulario(true)} />
-          )}
-        </View>
-      )}
+      </Modal>
     </View>
   );
 }
@@ -161,7 +201,32 @@ const styles = StyleSheet.create({
     padding: 8,
     marginVertical: 5,
   },
-  formulario: {
-    padding: 10,
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    elevation: 5,
+  },
+  modalTitulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalBotones: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  modalBoton: {
+    flex: 1,
+    marginHorizontal: 5,
   },
 });
