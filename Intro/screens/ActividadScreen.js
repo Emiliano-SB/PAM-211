@@ -104,8 +104,7 @@ export default function ActividadScreen() {
         animationType='fade'
         transparent={true}
         visible={modalVisible}
-        onRequestClose={cerrarModal}
-      >
+        onRequestClose={cerrarModal}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitulo}>
