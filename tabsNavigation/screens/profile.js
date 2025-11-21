@@ -3,7 +3,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 
-
 export default function profile({ navigation }) {
   return (
     <View style={styles.container}>
@@ -37,5 +36,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     color: 'green',
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginBottom: 20,
+    width: '80%',
+    alignItems: 'center',
+    backgroundColor:'green'
+  },
+  buttonText :{
+    color:'#fff',
+    fontSize: 16,
   },
 });
