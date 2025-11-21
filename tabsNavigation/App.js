@@ -1,12 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
+import 'react-native-gesture-handler';
+
+
 
 import home from './screens/home';
 import profile from "./screens/profile";
 import settings from "./screens/settings";
 
+
+
+
 const Tab = createBottomTabNavigator();
+
 
 export default function App() {
   return (
@@ -17,7 +24,6 @@ export default function App() {
           headerShown: false,
           tabBarIcon: ({color, size}) => {
             let iconName;
-
             if(route.name === 'Home'){
               iconName = 'home';
             } else if(route.name === 'Profile'){
@@ -38,8 +44,8 @@ export default function App() {
         <Tab.Screen name="Home" component={home}/>
         <Tab.Screen name="Profile" component={profile}/>
         <Tab.Screen name="Settings" component={settings}/>
-        
       </Tab.Navigator>
+
     </NavigationContainer>
-  );
+    );
 }
