@@ -60,6 +60,67 @@ class DatabaseService{
             };
         }
     }
+
+    //Función para eliminar 
+    async delete(nombre){
+        if(Platform.OS === 'web'){
+            const usuarios = await this.getAll();
+            const usuariosFiltrados = usuarios.filter(filtro => filtro.nombre !== nombre);
+            localStorage.setItem(this.storageKey, JSON.stringify(usuariosFiltrados));
+        } else {
+            await this.db.runAsync(
+                'DELETE FROM usuarios WHERE nombre =?',
+                usuarios.nombre
+            );
+        }
+    }
+
+    //Función para editar 
+    async update(id, nuevoNombre){
+        if(Platform.OS === 'web'){
+            const usuarios = await this.getAll();
+            const indice = usuarios.findIndex( filtro => filtro.id === id);
+            if(indice !== -1){
+                usuarios[indice].nombre = nuevoNombre;
+                usuarios[indice].fecha_creacion = usuarios[indice].fecha_creacion || new Date().toISOString();
+                localStorage.setItem(this.storageKey, JSON.stringify(usuarios));
+                return usuarios[indice];
+            } else {
+                throw new Error('usuario no encontrado')
+            }
+        }
+        else {
+           if(this.db.runAsync){
+            await this.db.runAsync(
+                'UPDATE usuarios SET nombre =? WHERE id=?',
+                [nuevoNombre, id]
+            );
+            return {
+                id: id,
+                nombre: nuevoNombre,
+                fecha_creacion: new Date().toISOString()
+            };
+           } else {
+                return await new Promise((resolve, reject) => {
+                    this.db.transaction(tx => {
+                        tx.executeSql(
+                            'UPDATE usuarios SET nombre =? WHERE id =?',
+                            [nuevoNombre, id],
+                            () => resolve({
+                                id: id,
+                                nombre: nuevoNombre,
+                                fecha_creacion: new Date().toISOString()
+                            }),
+                            (_, err) => {reject(err); 
+                                return false;
+                            }
+                        );
+                    });
+                });
+           }
+        }
+    }
+
 }
 
 //Exportar instacia de la clase

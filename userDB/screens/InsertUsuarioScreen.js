@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform, Modal } from 'react-native';
 import { UsuarioController } from '../controllers/UsuarioController';
 
 const controller = new UsuarioController();
@@ -11,6 +11,15 @@ export default function InsertUsuarioScreen() {
   const [nombre, setNombre] = useState('');
   const [loading, setLoading] = useState(true);
   const [guardando, setGuardando] = useState(false);
+  const [eliminado, setEliminado] = useState(false);
+  const [nombre2 , setNombre2] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editarId, setEditarID] = useState(null);
+  const [editarNombre, setEditarNombre] = useState('');
+  const [editarGuardado, setEditarGuardado] = useState(false);
+
+
+
 
   //SELECT - Cargar usuarios desde la BD
   const cargarUsuarios = useCallback( async () => {
@@ -60,6 +69,45 @@ export default function InsertUsuarioScreen() {
     }
   };
 
+  //Eliminar usuario
+  const handleEliminar = async ()=> {
+    if(eliminado) return;
+    try {
+      setEliminado(true);
+      await controller.eliminarUsuario(nombre2);
+      Alert.alert('Eliminando Usuario', `"${nombre2}" eliminado correctamente`);
+      setNombre2('');
+    }
+    catch(error){
+      Alert.alert('Error', error.message);
+    }
+    finally{
+      setEliminado(false);
+    }
+  };
+
+  //Editar usuario
+  const handleEditar = async (id, nuevoNombre) => {
+    if(editarGuardado) return;
+    try {
+      if(!nuevoNombre || nuevoNombre.trim() === ''){
+        Alert.alert('Error, por favor ingrese el nombre');
+        return;
+      }
+      setEditarGuardado(true);
+      
+      await controller.actualizarUsuario(id, nuevoNombre);  
+      setModalVisible(false);
+      setEditarID(null);
+      setEditarNombre('');
+      await cargarUsuarios();
+      Alert.alert('Usuario Actualizado', `ID: ${id} actualizado a "${nuevoNombre}"`);
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
+
   //Renderizar cada usuario
   const renderUsuario = ({item, index}) => (
     <View style={styles.userItem}>
@@ -77,9 +125,17 @@ export default function InsertUsuarioScreen() {
           })}
         </Text>
       </View>
+      <TouchableOpacity
+      style={styles.boton}
+      onPress={()=>{
+        setEditarID(item.id);
+        setEditarNombre(item.nombre);
+        setModalVisible(true);
+      }}>
+        <Text style={styles.texto}>Editar</Text>
+      </TouchableOpacity>
     </View>
   );
-
 
   return (
     
@@ -95,7 +151,7 @@ export default function InsertUsuarioScreen() {
       {/* Zona del INSERT */}
 
       <View style={styles.insertSection}>
-        <Text style={styles.sectionTitle}> Insertar Usuario</Text>
+        <Text style={styles.sectionTitle}>Insertar Usuario</Text>
         
         <TextInput
           style={styles.input}
@@ -118,7 +174,31 @@ export default function InsertUsuarioScreen() {
 
       </View>
 
+      {/* Eliminar Usuario*/}
 
+      <View style={styles.insertSection}>
+        <Text style={styles.sectionTitle}>Eliminar Usuario</Text>
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Escribe el nombre del usuario"
+          value={nombre2}
+          onChangeText={setNombre2}
+          editable={!eliminado}
+        />
+
+        <TouchableOpacity 
+          style={[styles.button, eliminado && styles.buttonDisabled]} 
+          onPress={handleEliminar}
+          disabled={eliminado} >
+
+          <Text style={styles.buttonText}>
+            {eliminado ? ' Eliminando...' : 'Eliminar Usuario'}
+          </Text>
+
+        </TouchableOpacity>
+
+      </View>
 
       {/* Zona del SELECT */}
 
@@ -135,6 +215,40 @@ export default function InsertUsuarioScreen() {
           </TouchableOpacity>
 
         </View>
+
+        {/* Modal para editar nombre */}
+
+        <Modal visible={modalVisible} transparent animationType="fade">
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+
+              <Text style={styles.sectionTitle}>Editar Nombre</Text>
+
+                <TextInput
+                style={styles.input}
+                value={editarNombre}
+                onChangeText={setEditarNombre}
+                placeholder="Nuevo nombre"/>
+
+              <TouchableOpacity
+              style={styles.button}
+              onPress={async () => {
+                await handleEditar(editarId, editarNombre);
+              setModalVisible(false);
+              }}>
+                <Text style={styles.buttonText}>Guardar Cambios</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: '#999', marginTop: 10 }]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.buttonText}>Cancelar</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        </Modal>
 
         {loading ? (
           <View style={styles.loadingContainer}>
@@ -156,10 +270,7 @@ export default function InsertUsuarioScreen() {
           />
         )}
 
-
       </View>
-
-
     </View>
   );
 }
@@ -343,4 +454,51 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1976D2',
   },
+  botonEditar:{
+    backgroundColor: '#007AFF',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    height: 35,
+    justifyContent: 'center',
+  },
+  editarBoton: {
+    backgroundColor: '#007AFF',
+    padding: 6,
+    borderRadius: 6,
+    marginTop: 6,
+    alignSelf: 'flex-start',
+  },
+  editarTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '85%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    elevation: 5,
+  },
+  botonEditar: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    justifyContent: 'center',
+    height: 35,
+  },
+  editarTexto: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+
 });
