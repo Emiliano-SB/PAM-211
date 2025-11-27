@@ -34,11 +34,11 @@ export default function MenuScreen() {
         case 'modal':
             return<ModalScreen/>;
         case 'repaso':
-            return<RepasoScreen/>;
+            return <RepasoScreen/>;
         case 'actividad':
             return <ActividadScreen/>;
         case 'transaccion':
-            return<TransaccionesScreen/>;
+            return <TransaccionesScreen/>;
         case 'menu' :
             default: 
             return (
