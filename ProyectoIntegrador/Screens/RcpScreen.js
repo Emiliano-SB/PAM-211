@@ -21,7 +21,7 @@ export default function Rcp() {
 
         <Text style={styles.subtitle}>¿Qué es?</Text>
         <Text style={styles.text}>
-          El RCP es un conjunto de maniobras de emergencia qeu permite mantener la circulación snaguínea y la oxigenación
+          El RCP es un conjunto de maniobras de emergencia que permite mantener la circulación sanguínea y la oxigenación
           de los órganos vitales (como el cerebro y los pulmones) cuando el corazón deja de latir o cuando la persona deja de
           respirar normalmente. Esta técnica se aplica cuando alguien está inconsciente, no responde y no respira con normalidad.
         </Text>
@@ -33,15 +33,15 @@ export default function Rcp() {
           3. Llama a los servicios de emergencia{"\n"}
           4. Abre la via aérea inclinando la cabeza y levantando el mentón{"\n"}
           5. Verifica si respira normalmente{"\n"}
-          Si con esto no recibes respuesta de la persona, realiza lo siguiente:{"\n"}
+          NOTA: Si con esto no recibes respuesta de la persona, realiza lo siguiente:{"\n"}
           6. Si no respira, inicia compresiones en la parte central del pecho (con una profundidad aproximadamente de 5 a 6 cm) siguiendo el ritmo de las canciones como "Stayin' Alive" de los Bee Gees, "Con todos menos conmigo" de Timbiriche o "El Club" de Bad Bunny. {"\n"}
-          7.Continua hasta que llegue el cuerpo de emergencia o hasta que la persona muestre signos
+          7. Continua las compresiones hasta que el cuerpo médico llegue o hasta que la personas muestre signos de reacción.
         </Text>
 
 
         <Text style={styles.subtitle}>Video Explicativo</Text>
 
-        <Text style={styles.text}>A continuación se muestra una imagen del video explicativo.</Text>
+        <Text style={styles.text}>A continuación se dejara un video explicando este tema</Text>
         <Image
           source={require('../assets/rcp.jpg')}
           style={styles.videoImage}
